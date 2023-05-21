@@ -1,10 +1,19 @@
 def getQuantity(productName):               #To validate that quantity entered is not negative 
+    while True:
+        q = int(input(f"Enter the quantity of {productName} : "))
+        if q<0:
+            print('Invalid input!! Quantity cannot be negative')
+        else:
+            return q
 
-    q = int(input(f"Enter the quantity of {productName} : "))
-    if q<0:
-        print('Enter a valid product quantity !!\nQuantity cannot be negative')
-        return getQuantity(productName)
-    return q
+
+def checkWrapped(productName):              #validate gift package or not
+    while True:
+        val = input(f"is {productName} wrapped as a gift? (y/n) :")
+        if val.lower() == 'y' or val.lower() == 'n':
+            return val.lower() == 'y'
+        else:
+            print("Invalid input!! Please enter 'y' or 'n'")
 
 
 def setDiscount(cart, cartTotal, totalQuantity):        #assigns the discount type
@@ -57,8 +66,8 @@ for product,price in products:
     q = getQuantity(product)
     is_wrapped = False
     if q != 0:
-        is_wrapped = input(f'is {product} wrapped as a gift? (y/n) : ') == 'y'
-
+        is_wrapped = checkWrapped(product)
+        
     cart.append((product,price,q,is_wrapped))
     cartTotal += q*price
     totalQuantity += q
