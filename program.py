@@ -75,11 +75,13 @@ for product,price in products:
         totalWrap += q
     
 
-
-print('-------------------------------------------------------')
+print('---------------------------------------------------------------------------')
 print('Product_name \t Price \t Quantity \t Total_price')
 for product,price,q,is_wrapped in cart:
-    print(f'{product} \t {price} $\t {q} \t\t {q*price} $')
+    print(f'{product} \t {price} $\t {q} \t\t {q*price} $', end='')
+    if is_wrapped:
+        print("\t\t-- Gift wrapped --", end='')
+    print()
 
 shippingFee = 5*(totalQuantity//10) if totalQuantity%10 == 0 else 5*((totalQuantity//10)+1)
 appliedDiscount, discount = setDiscount(cart, cartTotal, totalQuantity)
